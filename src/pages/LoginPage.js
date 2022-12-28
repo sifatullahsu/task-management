@@ -40,11 +40,11 @@ const LoginPage = () => {
         <form onSubmit={handleForm} className="space-y-6 ng-untouched ng-pristine ng-valid">
           <div className="space-y-1 text-sm">
             <label htmlFor="email" className="block text-gray-600">Email</label>
-            <input type="text" name="email" id="email" placeholder="email" className="w-full px-4 py-3 rounded-md border-gray-300 bg-white border text-gray-800 focus:border-cyan-600" />
+            <input type="text" name="email" id="email" placeholder="email" className="w-full px-4 py-3 border-gray-300 bg-white border text-gray-800 focus:border-cyan-600" />
           </div>
           <div className="space-y-1 text-sm">
             <label htmlFor="password" className="block text-gray-600">Password</label>
-            <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md border-gray-300 bg-white border text-gray-800 focus:border-cyan-600" />
+            <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 border-gray-300 bg-white border text-gray-800 focus:border-cyan-600" />
           </div>
           <button className="block w-full p-3 text-center rounded-sm text-gray-50 bg-cyan-600">Login</button>
         </form>

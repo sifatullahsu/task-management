@@ -1,7 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { toast } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContextComp';
 
 const Header = () => {
+  const { user, userLogout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    userLogout()
+      .then(result => {
+        toast.success('Logout successfull..');
+        navigate('/login');
+      })
+      .catch(err => {
+        toast.error('Somthing is wrong..')
+        console.log(err);
+      })
+  }
+
   return (
     <>
       <header className="bg-gray-100 text-gray-800">
@@ -16,15 +33,26 @@ const Header = () => {
             <li className="flex">
               <Link to='/' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Home</Link>
             </li>
-            <li className="flex">
-              <Link to='/dashboard' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Dashboard</Link>
-            </li>
-            <li className="flex">
-              <Link to='/login' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Login</Link>
-            </li>
-            <li className="flex">
-              <Link to='/register' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Register</Link>
-            </li>
+            {
+              user ?
+                <>
+                  <li className="flex">
+                    <Link to='/dashboard' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Dashboard</Link>
+                  </li>
+                  <li className="flex">
+                    <button onClick={handleLogout} className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Logout</button>
+                  </li>
+                </>
+                :
+                <>
+                  <li className="flex">
+                    <Link to='/login' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Login</Link>
+                  </li>
+                  <li className="flex">
+                    <Link to='/register' className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Register</Link>
+                  </li>
+                </>
+            }
           </ul>
           <button className="flex justify-end p-4 md:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
