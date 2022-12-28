@@ -1,11 +1,11 @@
 import React from 'react';
 
-const AddTask = () => {
+const Loading = () => {
   return (
     <div>
-      aa
+      loading
     </div>
   );
 };
 
-export default AddTask;
+export default Loading;

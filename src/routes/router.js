@@ -1,11 +1,14 @@
 import AddTask from "../pages/AddTask";
 import CompletedTasks from "../pages/CompletedTasks";
+import DashPage from "../pages/DashPage";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import MyTasks from "../pages/MyTasks";
 import RegisterPage from "../pages/RegisterPage";
+import DashTemp from "../templates/DashTemp";
 import MainTemp from "../templates/MainTemp";
+import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -27,20 +30,30 @@ export const router = createBrowserRouter([
         element: <RegisterPage></RegisterPage>
       },
       {
+        path: '/*',
+        element: <ErrorPage></ErrorPage>
+      }
+    ]
+  },
+  {
+    path: '/dashboard',
+    element: <DashTemp></DashTemp>,
+    children: [
+      {
+        path: '',
+        element: <PrivateRoute><DashPage></DashPage></PrivateRoute>
+      },
+      {
         path: 'add-task',
-        element: <AddTask></AddTask>
+        element: <PrivateRoute><AddTask></AddTask></PrivateRoute>
       },
       {
         path: 'my-tasks',
-        element: <MyTasks></MyTasks>
+        element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>
       },
       {
         path: 'completed-tasks',
-        element: <CompletedTasks></CompletedTasks>
-      },
-      {
-        path: '/*',
-        element: <ErrorPage></ErrorPage>
+        element: <PrivateRoute><CompletedTasks></CompletedTasks></PrivateRoute>
       }
     ]
   }
