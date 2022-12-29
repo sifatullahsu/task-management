@@ -1,6 +1,7 @@
 import AddTask from "../pages/AddTask";
 import CompletedTasks from "../pages/CompletedTasks";
 import DashPage from "../pages/DashPage";
+import EditTask from "../pages/EditTask";
 import ErrorPage from "../pages/ErrorPage";
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
@@ -50,6 +51,11 @@ export const router = createBrowserRouter([
       {
         path: 'my-tasks',
         element: <PrivateRoute><MyTasks></MyTasks></PrivateRoute>
+      },
+      {
+        path: 'my-tasks/:id',
+        element: <PrivateRoute><EditTask></EditTask></PrivateRoute>,
+        loader: ({ params }) => params.id
       },
       {
         path: 'completed-tasks',

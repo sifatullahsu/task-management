@@ -40,7 +40,7 @@ const RegisterPage = () => {
 
   return (
     <div className='container py-10'>
-      <div className="w-full max-w-md mx-auto p-8 border space-y-3 rounded-xl bg-zinc-50 text-gray-800">
+      <div className="w-full max-w-md mx-auto p-8 border space-y-3 bg-zinc-50 text-gray-800">
         <h1 className="text-2xl font-bold text-center">Register</h1>
         <form onSubmit={handleForm} className="space-y-6 ng-untouched ng-pristine ng-valid">
           <div className="space-y-1 text-sm">
