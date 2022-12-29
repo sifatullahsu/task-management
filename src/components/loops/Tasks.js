@@ -43,18 +43,24 @@ const Tasks = ({ tasks, refetch }) => {
   }
 
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
+    <>
+      <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
+        {
+          tasks?.data.map(task =>
+            <Task
+              key={task._id}
+              task={task}
+              handleTaskDelete={handleTaskDelete}
+              handleTaskEdit={handleTaskEdit}
+            ></Task>
+          )
+        }
+      </div>
       {
-        tasks?.data.map(task =>
-          <Task
-            key={task._id}
-            task={task}
-            handleTaskDelete={handleTaskDelete}
-            handleTaskEdit={handleTaskEdit}
-          ></Task>
-        )
+        tasks?.data.length === 0 &&
+        <p>No data has been found..</p>
       }
-    </div>
+    </>
   )
 };
 
