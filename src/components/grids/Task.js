@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaCheckSquare, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Task = ({ task, handleTaskDelete, handleTaskEdit }) => {
@@ -13,6 +13,10 @@ const Task = ({ task, handleTaskDelete, handleTaskEdit }) => {
         <div className='flex flex-col items-center gap-2'>
           <Link to={`/dashboard/my-tasks/${task?._id}`}><FaEdit></FaEdit></Link>
           <FaTrashAlt onClick={() => handleTaskDelete(task?._id)}></FaTrashAlt>
+          {
+            task?.status !== 'completed' &&
+            <FaCheckSquare onClick={() => handleTaskEdit(task?._id, { status: 'completed' })}></FaCheckSquare>
+          }
         </div>
       </div>
     </div>

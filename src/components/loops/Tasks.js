@@ -3,7 +3,6 @@ import { toast } from 'react-hot-toast';
 import Task from '../grids/Task';
 
 const Tasks = ({ tasks, refetch }) => {
-  console.log(tasks.data);
 
   const handleTaskDelete = (id) => {
 
