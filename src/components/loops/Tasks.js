@@ -43,7 +43,7 @@ const Tasks = ({ tasks, refetch }) => {
   }
 
   return (
-    <div className='grid grid-cols-2 gap-3'>
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-3'>
       {
         tasks?.data.map(task =>
           <Task
