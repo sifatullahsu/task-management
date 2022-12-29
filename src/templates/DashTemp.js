@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ScrollToTop from '../components/ScrollToTop';
 import { AuthContext } from '../contexts/AuthContextComp';
+import userLogo from '../assets/user.png';
+import Footer from '../components/Footer';
 
 const DashTemp = () => {
 
-  const { userLogout } = useContext(AuthContext);
+  const { user, userLogout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -23,21 +24,20 @@ const DashTemp = () => {
       })
   }
 
-
   return (
     <>
       <ScrollToTop></ScrollToTop>
       <Header></Header>
-      <div className="container py-10">
+      <div className="container py-16">
         <div className='flex'>
           <div className='basis-72'>
             <div className="h-full w-full p-3 space-y-2 border bg-gray-50 text-gray-800">
               <div className="flex items-center p-2 space-x-4">
-                <img src="https://source.unsplash.com/100x100/?portrait" alt="" className="w-12 h-12 rounded-full bg-gray-500" />
+                <img src={userLogo} alt="" className="w-12 h-12 rounded-full bg-white" />
                 <div>
-                  <h2 className="text-lg font-semibold">Leroy Jenkins</h2>
+                  <h2 className="text-lg font-semibold">{user?.displayName || 'Unknown'}</h2>
                   <span className="flex items-center space-x-1">
-                    <Link to='' className="text-xs hover:underline text-gray-600">View profile</Link>
+                    <span className='text-xs hover:underline text-gray-600'>{user?.email}</span>
                   </span>
                 </div>
               </div>
@@ -80,7 +80,7 @@ const DashTemp = () => {
                   </li>
                 </ul>
                 <ul className="pt-4 pb-2 space-y-1 text-sm">
-                  <li>
+                  {/* <li>
                     <Link to='' className="flex items-center p-2 space-x-3 rounded-md">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current text-gray-600">
                         <path d="M245.151,168a88,88,0,1,0,88,88A88.1,88.1,0,0,0,245.151,168Zm0,144a56,56,0,1,1,56-56A56.063,56.063,0,0,1,245.151,312Z"></path>
@@ -88,7 +88,7 @@ const DashTemp = () => {
                       </svg>
                       <span>Settings</span>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <button onClick={handleLogout} className="flex items-center p-2 space-x-3 rounded-md">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-5 h-5 fill-current text-gray-600">

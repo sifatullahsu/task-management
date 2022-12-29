@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
+import { AuthContext } from '../../contexts/AuthContextComp';
 
 const TaskForm = ({ data, refetch }) => {
 
+  const { user } = useContext(AuthContext);
   const imageHostKey = process.env.REACT_APP_IMGBB_API;
 
-  const handlePostReq = (data, form) => {
+  const handlePostReq = (event, imageURL) => {
+
+    const form = event.target;
+    const task = form.task.value;
+    const image = imageURL ? imageURL : '';
+    const date = new Date().toISOString();
+
+    const finalData = {
+      description: task,
+      image: image,
+      status: 'processing',
+      issued: date,
+      deadline: '',
+      completed: '',
+      author: user.uid
+    }
 
     fetch(`http://localhost:5000/tasks`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(finalData)
     })
       .then(res => res.json())
       .then(data => {
         if (data.acknowledged) {
-          toast.success(`Task added..`);
+          toast.success('Task added..');
           form.reset();
         }
       })
@@ -25,14 +42,23 @@ const TaskForm = ({ data, refetch }) => {
   }
 
 
-  const handlePatchReq = (handleData, form) => {
+  const handlePatchReq = (event, imageURL) => {
+
+    const form = event.target;
+    const task = form.task.value;
+    const image = imageURL ? imageURL : data?.image;
+
+    const finalData = {
+      description: task,
+      image: image,
+    }
 
     fetch(`http://localhost:5000/tasks/${data?._id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
       },
-      body: JSON.stringify(handleData)
+      body: JSON.stringify(finalData)
     })
       .then(res => res.json())
       .then(data => {
@@ -45,7 +71,7 @@ const TaskForm = ({ data, refetch }) => {
   }
 
 
-  const handleImageUpload = (image, formData, form) => {
+  const handleImageUpload = (image, event) => {
 
     const imageData = new FormData();
     imageData.append('image', image);
@@ -55,37 +81,29 @@ const TaskForm = ({ data, refetch }) => {
       body: imageData
     })
       .then(res => res.json())
-      .then(data => {
-        const imageURL = data.data.url;
-        formData.image = imageURL;
+      .then(result => {
+        const imageURL = result.data.url;
 
         !data ?
-          handlePostReq(formData, form)
+          handlePostReq(event, imageURL)
           :
-          handlePatchReq(formData, form)
+          handlePatchReq(event, imageURL)
       })
   }
 
   const handleForm = (event) => {
     event.preventDefault();
 
-    const form = event.target;
-    const task = form.task.value;
-    const image = form.image.files[0];
-
-    const finalData = {
-      description: task,
-      image: data ? data?.image : ''
-    }
+    const image = event.target.image.files[0];
 
     if (image) {
-      handleImageUpload(image, finalData, form);
+      handleImageUpload(image, event);
     }
     else {
       !data ?
-        handlePostReq(finalData, form)
+        handlePostReq(event)
         :
-        handlePatchReq(finalData, form)
+        handlePatchReq(event)
     }
   }
 
