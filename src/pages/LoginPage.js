@@ -27,6 +27,7 @@ const LoginPage = () => {
             toast.success('Login Successful..');
             form.reset();
             navigate(from, { replace: true });
+            setUserLoading(false);
           })
       })
       .catch((err) => {

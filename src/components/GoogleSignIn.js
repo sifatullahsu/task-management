@@ -6,18 +6,24 @@ import { AuthContext } from '../contexts/AuthContextComp';
 
 const GoogleSignIn = ({ from }) => {
 
-  const { userSocialLogin } = useContext(AuthContext);
+  const { getUserJwt, userSocialLogin, setUserLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
 
   const handleGoogleSignIn = () => {
     userSocialLogin('google')
       .then(res => {
-        toast.success('Successfully logged in!!');
-        navigate(from);
+        getUserJwt(res.user.email)
+          .then(data => {
+            localStorage.setItem('task-token', data.token);
+            toast.success('Login Successful..');
+            navigate(from, { replace: true });
+            setUserLoading(false)
+          })
       })
       .catch(err => {
-        toast.error('Something is wrong!!');
+        toast.error(err.message);
+        setUserLoading(false);
       })
   }
 

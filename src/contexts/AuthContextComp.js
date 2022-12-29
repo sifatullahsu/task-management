@@ -10,7 +10,6 @@ const auth = getAuth(app);
 const AuthContextComp = ({ children }) => {
 
   const [user, setUser] = useState({});
-  const [userProfile, setUserProfile] = useState({});
   const [userLoading, setUserLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider();
@@ -66,9 +65,6 @@ const AuthContextComp = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) {
-        setUserProfile({})
-      }
       setUser(currentUser);
       setUserLoading(false);
     })
