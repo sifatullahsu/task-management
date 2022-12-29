@@ -24,10 +24,11 @@ const TaskForm = ({ data, refetch }) => {
       author: user.uid
     }
 
-    fetch(`http://localhost:5000/tasks`, {
+    fetch(`https://task-management-server-app.vercel.app/tasks`, {
       method: 'POST',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('task-token')}`
       },
       body: JSON.stringify(finalData)
     })
@@ -53,10 +54,11 @@ const TaskForm = ({ data, refetch }) => {
       image: image,
     }
 
-    fetch(`http://localhost:5000/tasks/${data?._id}`, {
+    fetch(`https://task-management-server-app.vercel.app/tasks/${data?._id}`, {
       method: 'PATCH',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('task-token')}`
       },
       body: JSON.stringify(finalData)
     })

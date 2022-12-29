@@ -6,8 +6,11 @@ const Tasks = ({ tasks, refetch }) => {
 
   const handleTaskDelete = (id) => {
 
-    fetch(`http://localhost:5000/tasks/${id}`, {
-      method: 'DELETE'
+    fetch(`https://task-management-server-app.vercel.app/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('task-token')}`
+      }
     })
       .then(res => res.json())
       .then(data => {
@@ -21,10 +24,11 @@ const Tasks = ({ tasks, refetch }) => {
 
   const handleTaskEdit = (id, data) => {
 
-    fetch(`http://localhost:5000/tasks/${id}`, {
+    fetch(`https://task-management-server-app.vercel.app/tasks/${id}`, {
       method: 'PATCH',
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'authorization': `Bearer ${localStorage.getItem('task-token')}`
       },
       body: JSON.stringify(data)
     })

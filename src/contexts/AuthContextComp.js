@@ -47,7 +47,7 @@ const AuthContextComp = ({ children }) => {
   const getUserJwt = async (email) => {
     const currentUser = { email }
 
-    const jwt = await fetch('http://localhost:5000/jwt', {
+    const jwt = await fetch('https://task-management-server-app.vercel.app/jwt', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

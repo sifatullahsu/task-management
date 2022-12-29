@@ -12,7 +12,12 @@ const CompletedTasks = () => {
   const { data: tasks = [], refetch, isLoading } = useQuery({
     queryKey: ['tasks', location],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/tasks/uid/${user?.uid}?status=completed`);
+      const res = await fetch(`https://task-management-server-app.vercel.app/tasks/uid/${user?.uid}?status=completed`, {
+        method: 'GET',
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('task-token')}`
+        }
+      });
       const data = await res.json();
 
       return data;
