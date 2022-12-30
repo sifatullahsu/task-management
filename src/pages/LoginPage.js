@@ -3,10 +3,11 @@ import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GitHubSignIn from '../components/GitHubSignIn';
 import GoogleSignIn from '../components/GoogleSignIn';
+import Loading from '../components/Loading';
 import { AuthContext } from '../contexts/AuthContextComp';
 
 const LoginPage = () => {
-  const { userLogin, setUserLoading, getUserJwt } = useContext(AuthContext);
+  const { userLogin, userLoading, setUserLoading, getUserJwt } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,6 +35,12 @@ const LoginPage = () => {
         toast.error(err.message);
         setUserLoading(false);
       })
+  }
+
+
+
+  if (userLoading) {
+    return <Loading isCenter={true} isHeight={true}></Loading>
   }
 
   return (

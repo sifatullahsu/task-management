@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Loading from '../components/Loading';
 import { AuthContext } from '../contexts/AuthContextComp';
 
 const RegisterPage = () => {
 
-  const { userRegister, setUserLoading, updateUserProfile, getUserJwt } = useContext(AuthContext);
+  const { userRegister, userLoading, setUserLoading, updateUserProfile, getUserJwt } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,16 +20,21 @@ const RegisterPage = () => {
     const email = form.email.value;
     const password = form.password.value;
 
+
+
     userRegister(email, password)
       .then(result => {
+        const userEmail = result.user.email;
+
         updateUserProfile({ displayName: name })
-          .then(result => {
-            getUserJwt(result.user.email)
+          .then(() => {
+            getUserJwt(userEmail)
               .then(data => {
                 localStorage.setItem('task-token', data.token);
                 toast.success('Register Successful..');
                 form.reset();
                 navigate(from, { replace: true });
+                setUserLoading(false);
               })
           })
       })
@@ -36,6 +42,11 @@ const RegisterPage = () => {
         toast.error(err.message);
         setUserLoading(false);
       })
+  }
+
+
+  if (userLoading) {
+    return <Loading isCenter={true} isHeight={true}></Loading>
   }
 
   return (

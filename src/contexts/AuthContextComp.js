@@ -30,6 +30,7 @@ const AuthContextComp = ({ children }) => {
   }
 
   const updateUserProfile = arg => {
+    setUserLoading(true);
     return updateProfile(auth.currentUser, arg)
   }
 
@@ -48,6 +49,7 @@ const AuthContextComp = ({ children }) => {
 
 
   const getUserJwt = async (email) => {
+    setUserLoading(true);
     const currentUser = { email }
 
     const jwt = await fetch('https://task-management-server-app.vercel.app/jwt', {
