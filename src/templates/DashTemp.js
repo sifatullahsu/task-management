@@ -30,16 +30,16 @@ const DashTemp = () => {
     <>
       <ScrollToTop></ScrollToTop>
       <Header></Header>
-      <div className="container py-16">
+      <div className="dash container py-16">
         <div className='flex flex-wrap md:flex-nowrap'>
-          <div className='basis-full md:basis-72 mb-10 md:mb-0'>
-            <div className="h-full w-full p-3 space-y-2 border bg-gray-50 text-gray-800">
+          <div className='basis-full md:basis-72 md:w-72 mb-10 md:mb-0'>
+            <div className="sidebar h-full w-full p-3 space-y-2 border bg-gray-50 text-gray-800">
               <div className="flex items-center p-2 space-x-4">
                 <img src={userLogo} alt="" className="w-12 h-12 rounded-full bg-white" />
                 <div>
                   <h2 className="text-lg font-semibold">{user?.displayName || 'Unknown'}</h2>
                   <span className="flex items-center space-x-1">
-                    <span className='text-xs hover:underline text-gray-600'>{user?.email}</span>
+                    <span className='text-xs hover:underline text-gray-600 text-ellipsis inline-block'>{user?.email}</span>
                   </span>
                 </div>
               </div>

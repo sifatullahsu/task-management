@@ -45,7 +45,7 @@ const LoginPage = () => {
 
   return (
     <div className='container py-10'>
-      <div className="w-full max-w-md mx-auto p-8 border space-y-3 bg-zinc-50 text-gray-800">
+      <div className="auth-form w-full max-w-md mx-auto p-8 border space-y-3 bg-zinc-50 text-gray-800">
         <h1 className="text-2xl font-bold text-center">Login</h1>
         <form onSubmit={handleForm} className="space-y-6 ng-untouched ng-pristine ng-valid">
           <div className="space-y-1 text-sm">
@@ -56,7 +56,7 @@ const LoginPage = () => {
             <label htmlFor="password" className="block text-gray-600">Password</label>
             <input type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 border-gray-300 bg-white border text-gray-800 focus:border-cyan-600" />
           </div>
-          <button className="block w-full p-3 text-center rounded-sm text-gray-50 bg-cyan-600">Login</button>
+          <button type='submit' className="block w-full p-3 text-center rounded-sm text-gray-50 bg-cyan-600">Login</button>
         </form>
         <div className="flex items-center pt-4 space-x-1">
           <div className="flex-1 h-px sm:w-16 bg-gray-300"></div>

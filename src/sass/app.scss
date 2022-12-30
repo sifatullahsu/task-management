@@ -2,6 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+
+$primary-color : #2A303C;
+$secondary-color: #252a35;
+$border-color: #3d3d4d;
+$white-color: #fff;
+$white-comfort-color: #f0f0f0;
+$text-color: rgb(75, 85, 99);
+$field-color: #313846;
+
+
+.theme-dark {
+  background: $primary-color;
+  color: $white-color;
+}
+
+.theme-dark textarea,
+.theme-dark input:not(input[type=file]) {
+  background-color: $field-color;
+  border-color: $border-color !important;
+  color: $white-comfort-color;
+  outline: 0;
+}
+
+.theme-dark button[type=submit] {
+  background-color: $secondary-color;
+  border: 1px solid $border-color;
+}
+
+.theme-dark header,
+.theme-dark footer {
+  background-color: $secondary-color;
+  border-color: $border-color;
+}
+
+.theme-dark .task {
+  background-color: $secondary-color;
+  border-color: $border-color;
+}
+
+.theme-dark .task .task-body .task-body-top,
+.theme-dark .task .task-body .task-body-bottom,
+.theme-dark .task .task-action {
+  border-color: $border-color;
+}
+
+.theme-dark .dash .sidebar {
+  background-color: $secondary-color;
+  color: $white-comfort-color;
+  border-color: $border-color;
+}
+
+.theme-dark .dash .sidebar .active {
+  background-color: $primary-color;
+  border-color: $border-color;
+}
+
+.theme-dark .dash .sidebar .divide-y .space-y-1:last-child {
+  border-color: $border-color;
+}
+
+.theme-dark .auth-form {
+  background-color: $secondary-color;
+  color: $white-comfort-color;
+  border-color: $border-color;
+}
+
+.theme-dark .auth-form button[type=submit] {
+  background-color: $primary-color;
+  border: 1px solid $border-color;
+}
+
+.theme-dark .auth-form a {
+  color: $text-color;
+}
+
+.theme-dark .hero h1 {
+  color: $white-comfort-color;
+}
+
+.theme-dark .hero p {
+  color: $white-comfort-color;
+}
+
+.theme-dark .hero a {
+  background-color: $secondary-color;
+  color: $white-comfort-color;
+  border: 1px solid $border-color;
+}
+
+.theme-dark .loading-icons div {
+  background-color: $white-comfort-color;
+}
+
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
@@ -30,4 +124,50 @@ h6 {
 
 .loading-height {
   height: 450px;
+}
+
+
+
+.checkbox {
+  opacity: 0;
+  display: none;
+  position: absolute;
+}
+
+.label {
+  width: 37px;
+  height: 20px;
+  background-color: #111;
+  display: flex;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  position: relative;
+  transform: scale(1.5);
+}
+
+.ball {
+  width: 17px;
+  height: 16px;
+  background-color: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked+.label .ball {
+  transform: translateX(16px);
+}
+
+.fa-moon {
+  color: white;
+  font-size: 10px;
+}
+
+.fa-sun {
+  color: white;
+  font-size: 10px;
 }

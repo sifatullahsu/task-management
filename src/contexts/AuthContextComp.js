@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import app from '../firebase/firebase.init';
+import { getLocalStorage } from '../utilities/utilities';
 
 
 export const AuthContext = createContext();
@@ -8,6 +9,9 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthContextComp = ({ children }) => {
+
+  const isDark = getLocalStorage()?.darkMode;
+  const [dark, setDark] = useState(isDark === null ? false : isDark);
 
   const [user, setUser] = useState({});
   const [userLoading, setUserLoading] = useState(true);
@@ -77,6 +81,7 @@ const AuthContextComp = ({ children }) => {
   }, []);
 
   const authInfo = {
+    dark, setDark,
     user,
     userLoading, setUserLoading,
     userLogin,
