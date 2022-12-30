@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { BsArrowClockwise } from 'react-icons/bs';
+import { FaTrashAlt } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/AuthContextComp';
 
 const TaskForm = ({ data, refetch }) => {
 
   const { user } = useContext(AuthContext);
   const imageHostKey = process.env.REACT_APP_IMGBB_API;
+  const [imgDelete, setImgDelete] = useState(false);
 
   const handlePostReq = (event, imageURL) => {
 
@@ -47,7 +50,7 @@ const TaskForm = ({ data, refetch }) => {
 
     const form = event.target;
     const task = form.task.value;
-    const image = imageURL ? imageURL : data?.image;
+    const image = imageURL ? imageURL : imgDelete === false ? data?.image : '';
 
     const finalData = {
       description: task,
@@ -126,18 +129,36 @@ const TaskForm = ({ data, refetch }) => {
 
           {
             data &&
-            <div className='absolute top-0 right-0'>
+            <div className='absolute top-0 right-0 flex'>
+              <div>
+                {
+                  data?.image ?
+                    <>
+                      {
+                        !imgDelete &&
+                        <img src={data?.image} className='w-[100px] max-h-[60px] object-fill' alt="" />
+                      }
+                    </>
+                    :
+                    <p>No image found</p>
+                }
+              </div>
               {
-                data?.image ?
-                  <img src={data?.image} className='w-[100px] max-h-[60px] object-fill' alt="" />
-                  :
-                  <p>No image found</p>
+                data?.image &&
+                <div className='bg-gray-100 h-[60px] flex items-center p-2 border'>
+                  {
+                    imgDelete === false ?
+                      <button type="button" onClick={() => setImgDelete(true)}><FaTrashAlt></FaTrashAlt></button>
+                      :
+                      <button type="button" onClick={() => setImgDelete(false)}><BsArrowClockwise></BsArrowClockwise></button>
+                  }
+                </div>
               }
             </div>
           }
         </div>
 
-        <button className="block w-full p-3 text-center rounded-sm text-gray-50 bg-cyan-600">
+        <button type='submit' className="block w-full p-3 text-center rounded-sm text-gray-50 bg-cyan-600">
           {data ? 'Update Task' : 'Add Task'}
         </button>
       </form>

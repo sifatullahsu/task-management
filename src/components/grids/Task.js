@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React from 'react';
-import { FaCheckSquare, FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaMinusSquare, FaTrashAlt } from 'react-icons/fa';
+import { BsCheckSquareFill } from 'react-icons/bs';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { Link } from 'react-router-dom';
 import 'react-photo-view/dist/react-photo-view.css';
@@ -43,12 +44,21 @@ const Task = ({ task, handleTaskDelete, handleTaskEdit }) => {
           <FaTrashAlt onClick={() => handleTaskDelete(task?._id)}></FaTrashAlt>
           {
             task?.status !== 'completed' &&
-            <FaCheckSquare
+            <BsCheckSquareFill
               onClick={() => handleTaskEdit(task?._id, {
                 status: 'completed',
                 completed: new Date().toISOString()
               })}
-            ></FaCheckSquare>
+            ></BsCheckSquareFill>
+          }
+          {
+            task?.status === 'completed' &&
+            <FaMinusSquare
+              onClick={() => handleTaskEdit(task?._id, {
+                status: 'processing',
+                completed: ''
+              })}
+            ></FaMinusSquare>
           }
         </div>
       </div>
