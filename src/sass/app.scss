@@ -47,6 +47,16 @@ $field-color: #313846;
   border-color: $border-color;
 }
 
+.task .task-action a,
+.task .task-action button {
+  padding: 3px;
+}
+
+.theme-dark .task-image-preview div {
+  background-color: $secondary-color;
+  border-color: $border-color;
+}
+
 .theme-dark .dash .sidebar {
   background-color: $secondary-color;
   color: $white-comfort-color;
@@ -170,4 +180,62 @@ h6 {
 .fa-sun {
   color: white;
   font-size: 10px;
+}
+
+
+
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+.bm-burger-bars {
+  background: #373a47;
+}
+
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+.bm-menu {
+  background: $primary-color;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+.bm-item {
+  display: inline-block;
+}
+
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.bm-item li {
+  margin-bottom: 20px;
 }

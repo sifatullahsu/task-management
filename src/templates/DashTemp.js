@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import ScrollToTop from '../components/ScrollToTop';
 import { AuthContext } from '../contexts/AuthContextComp';
@@ -35,7 +35,7 @@ const DashTemp = () => {
           <div className='basis-full md:basis-72 md:w-72 mb-10 md:mb-0'>
             <div className="sidebar h-full w-full p-3 space-y-2 border bg-gray-50 text-gray-800">
               <div className="flex items-center p-2 space-x-4">
-                <img src={userLogo} alt="" className="w-12 h-12 rounded-full bg-white" />
+                <img src={userLogo} alt="" className="w-12 h-12 rounded-full border bg-white" />
                 <div>
                   <h2 className="text-lg font-semibold">{user?.displayName || 'Unknown'}</h2>
                   <span className="flex items-center space-x-1">
@@ -106,7 +106,7 @@ const DashTemp = () => {
               </div>
             </div>
           </div>
-          <div className='basis-full px-5'>
+          <div className='basis-full px-0 md:px-5'>
             <Outlet></Outlet>
           </div>
         </div>

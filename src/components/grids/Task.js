@@ -11,20 +11,20 @@ const Task = ({ task, handleTaskDelete, handleTaskEdit }) => {
   return (
     <div className='task flex bg-gray-50 border'>
       <div className='task-body basis-full'>
-        <div className='task-body-top flex justify-between border-b px-3 py-1 text-sm text-gray-400 capitalize'>
-          <span>Status: {task?.status}</span>
-          <span>issued: {format(new Date(task.issued), 'dd-MM-yyyy HH:mm a')}</span>
+        <div className='task-body-top flex justify-between items-end border-b px-3 py-1 text-sm text-gray-400 capitalize'>
+          <span>Status: <span className='block md:inline'>{task?.status}</span></span>
+          <span>issued: <span className='block md:inline'>{format(new Date(task.issued), 'dd-MM-yyyy HH:mm a')}</span></span>
         </div>
         <div className='task-body-main p-3'>
           <p>{task?.description}</p>
         </div>
         {
           (task?.image || task?.completed) &&
-          <div className='task-body-bottom flex justify-between border-t px-3 py-1 text-sm text-gray-400 capitalize'>
+          <div className='task-body-bottom flex justify-between items-end border-t px-3 py-1 text-sm text-gray-400 capitalize'>
             <span>
               {
                 task.status === 'completed' &&
-                <>Completed: {format(new Date(task.completed), 'dd-MM-yyyy HH:mm a')}</>
+                <>Completed: <span className='block md:inline'>{format(new Date(task.completed), 'dd-MM-yyyy HH:mm a')}</span></>
               }
             </span>
             {
@@ -41,24 +41,24 @@ const Task = ({ task, handleTaskDelete, handleTaskEdit }) => {
       <div className='task-action basis-16 border-l p-3 text-gray-600'>
         <div className='flex flex-col items-center gap-2'>
           <Link to={`/dashboard/my-tasks/${task?._id}`}><FaEdit></FaEdit></Link>
-          <FaTrashAlt onClick={() => handleTaskDelete(task?._id)}></FaTrashAlt>
+          <button onClick={() => handleTaskDelete(task?._id)}><FaTrashAlt></FaTrashAlt></button>
           {
             task?.status !== 'completed' &&
-            <BsCheckSquareFill
-              onClick={() => handleTaskEdit(task?._id, {
-                status: 'completed',
-                completed: new Date().toISOString()
-              })}
-            ></BsCheckSquareFill>
+            <button onClick={() => handleTaskEdit(task?._id, {
+              status: 'completed',
+              completed: new Date().toISOString()
+            })}>
+              <BsCheckSquareFill></BsCheckSquareFill>
+            </button>
           }
           {
             task?.status === 'completed' &&
-            <FaMinusSquare
-              onClick={() => handleTaskEdit(task?._id, {
-                status: 'processing',
-                completed: ''
-              })}
-            ></FaMinusSquare>
+            <button onClick={() => handleTaskEdit(task?._id, {
+              status: 'processing',
+              completed: ''
+            })}>
+              <FaMinusSquare></FaMinusSquare>
+            </button>
           }
         </div>
       </div>

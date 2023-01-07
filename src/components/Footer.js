@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const Footer = () => {
@@ -10,9 +9,9 @@ const Footer = () => {
           <img src={logo} className='w-40 md:w-56 bg-white px-5 py-2 rounded' alt="" />
         </div>
         <ul className="flex flex-wrap justify-center mt-6 space-x-4 sm:space-x-8">
-          <li><Link to=''>Instagram</Link></li>
-          <li><Link to=''>Facebook</Link></li>
-          <li><Link to=''>Twitter</Link></li>
+          <li><a href='https://www.facebook.com/sifatullahhh' target='_blank' rel="noreferrer">Facebook</a></li>
+          <li><a href='https://github.com/sifatullahsu' target='_blank' rel="noreferrer">GitHub</a></li>
+          <li><a href='https://www.linkedin.com/in/sifatullahsu/' target='_blank' rel="noreferrer">LinkedIn</a></li>
         </ul>
       </div>
     </footer>

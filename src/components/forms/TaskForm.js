@@ -129,7 +129,7 @@ const TaskForm = ({ data, refetch }) => {
 
           {
             data &&
-            <div className='absolute top-0 right-0 flex'>
+            <div className='task-image-preview absolute top-0 right-0 flex'>
               <div>
                 {
                   data?.image ?
